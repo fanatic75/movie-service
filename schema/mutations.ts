@@ -1,11 +1,11 @@
 import { GraphQLObjectType } from 'graphql';
-import {createReview, editMovieReview} from './mutations/review';
+import {createReview, editReview} from './mutations/review';
 
 const mutation = new GraphQLObjectType({
   name: 'Mutation',
   fields: ({
     createReview,
-    editMovieReview
+    editReview
   })
 });
 

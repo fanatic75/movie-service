@@ -29,7 +29,7 @@ const createReview = {
   },
 };
 
-const editMovieReview = {
+const editReview = {
   type: reviewType,
   args: {
     id: {
@@ -53,4 +53,4 @@ const editMovieReview = {
   },
 };
 
-export { createReview, editMovieReview };
+export { createReview, editReview };

@@ -5,7 +5,7 @@ import context from "./lib/context";
 import schema from "./schema";
 import { rateLimit } from "express-rate-limit";
 import { ruruHTML } from "ruru/server";
-
+import cors from "cors";
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -19,6 +19,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(limiter);
+app.use(cors());
 
 if (process.env.NODE_ENV === "development") {
   app.get("/", (req, res, next) => {

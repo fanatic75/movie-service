@@ -1,4 +1,4 @@
-import { GraphQLInt, GraphQLNonNull } from "graphql";
+import { GraphQLInt, GraphQLNonNull, GraphQLString } from "graphql";
 import { Context, TMDB_API_URL } from "../../lib/context";
 import { Movie, PopularMovieResults, SearchMovieResults, movieType, popularMovieResultsType, searchMovieResultsType } from "../types/movie";
 
@@ -46,13 +46,12 @@ const searchMovie = {
   type: searchMovieResultsType,
   args: {
     title: {
-      type: new GraphQLNonNull(GraphQLInt),
+      type: new GraphQLNonNull(GraphQLString),
     },
   },
   resolve: async (_:unknown, { title }: { title: string }, context: Context):Promise<SearchMovieResults> => {
     try{
       const data = await context.axios.get<SearchMovieResults>(`${TMDB_API_URL}/search/movie?api_key=${process.env.TMDB_API_KEY}&language=en-US&query=${title}`)
-        console.log(data)
       return data.data;
     }catch(err){
       return {
