@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "tsc",
     "start": "pnpm run compile && node ./dist/index.js",
-    "migrate:execute": "tsx src/datastore/migrate.ts",
+    "migrate:execute": "tsx lib/migrate.ts",
     "migrate:generate": "pnpm drizzle-kit generate:pg"
   },
   "keywords": [],
@@ -23,6 +23,7 @@
     "graphql": "^16.8.1",
     "graphql-http": "^1.22.0",
     "pg": "^8.11.3",
+    "postgres": "^3.4.3",
     "ruru": "2.0.0-beta.11"
   },
   "devDependencies": {
