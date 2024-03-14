@@ -1,0 +1,46 @@
+services:
+  app: 
+    image: "node:20-alpine"
+    container_name: "movie-backend"
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - my-network
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+      - app-node-modules:/usr/src/app/node_modules
+    environment:
+      NODE_ENV: ${NODE_ENV:-development}
+      PORT: ${PORT:-3000}
+      DATABASE_URL: ${DATABASE_URL:-postgres://postgres:password@db:5432/postgres}
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres
+    container_name: "movie-db"
+    restart: on-failure
+    networks:
+      - my-network
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+networks:
+  my-network:
+    driver: bridge
+volumes:
+  db-data:
+  app-node-modules:
