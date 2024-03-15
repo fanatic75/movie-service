@@ -45,7 +45,7 @@ Before running the server, ensure you have the following prerequisites installed
 
 ## Database Migrations
 
-Database migrations are managed using Drizzle. To create migrations, migrations runs automatically when service is deployed, follow these steps:
+Database migrations are managed using Drizzle. To create migrations, follow these steps(migrations runs automatically when service is deployed):
 
 1. Ensure the Docker containers are running.
 
